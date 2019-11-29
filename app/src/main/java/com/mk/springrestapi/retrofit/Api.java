@@ -1,12 +1,17 @@
 package com.mk.springrestapi.retrofit;
 
-import com.mk.springrestapi.models.Repo;
+import com.mk.springrestapi.models.Student;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -23,11 +28,11 @@ public interface Api {
             @Field("urlToImage") String urlToImage,
             @Field("publishedAt") String publishedAt,
             @Field("content") String content
-    );*/;
+    );*/
 
-    @GET("everything")
-    Call<Response> getNews(@Query("q") String q, @Query("from") String from, @Query("sortBy") String sortBy, @Query("apiKey") String apiKey);
+    @POST("add")
+    Call<Student> addStudent(@Body Student student);
 
-    @GET("users/{user}/repos")
-    Call<List<Repo>> listRepos(@Path("user") String user);
+    @GET("students")
+    Call<List<Student>> getStudents(); //Call<List<Student>> getStudents(@Path("user") String user);
 }
