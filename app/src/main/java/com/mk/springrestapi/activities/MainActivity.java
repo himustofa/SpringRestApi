@@ -11,6 +11,9 @@ import com.mk.springrestapi.R;
 import com.mk.springrestapi.models.Student;
 import com.mk.springrestapi.retrofit.RetrofitClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void addStudent() {
         Student student = new Student();
+        student.setId(1);
         student.setName("Kamal");
         student.setAge(32);
+
         Call<Student> res = RetrofitClient.getInstance().getApi().addStudent(student);
         res.enqueue(new Callback<Student>() {
             @Override
