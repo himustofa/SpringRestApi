@@ -3,16 +3,19 @@ package com.mk.springrestapi.retrofit;
 import com.mk.springrestapi.models.Student;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -40,4 +43,10 @@ public interface Api {
 
     @GET("student/{id}")
     Call<Student> getById(@Path("id") String id);
+
+    @PUT("student/update/{id}")
+    Call<Student> updateById(@Path("id") String id, @Body Map<String, String> body);
+
+    @DELETE("student/delete/{id}")
+    Call<Boolean> deleteById(@Path("id") String id);
 }
