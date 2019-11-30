@@ -33,8 +33,11 @@ public interface Api {
 
     @Headers("Content-Type: application/json")
     @POST("add")
-    Call<Student> addStudent(@Body Student student);
+    Call<Student> add(@Body Student student);
 
     @GET("students")
-    Call<List<Student>> getStudents(); //Call<List<Student>> getStudents(@Path("user") String user);
+    Call<List<Student>> getAll(); //Call<List<Student>> getStudents(@Path("user") String user);
+
+    @GET("student/{id}")
+    Call<Student> getById(@Path("id") String id);
 }
