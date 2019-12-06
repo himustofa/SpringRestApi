@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadToServer(String filePath, String imageName) {
+
         /*//Create a file object using file path
         //File file = new File(filePath);
         File file = new File(filePath, imageName);

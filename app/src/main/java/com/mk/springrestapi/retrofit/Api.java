@@ -58,4 +58,5 @@ public interface Api {
     @POST("updatePhoto")
     @Multipart
     Call<String> uploadImage(@Part MultipartBody.Part img);
+
 }

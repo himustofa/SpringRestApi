@@ -103,5 +103,6 @@ public class Utility {
             e.printStackTrace();
         }
         return bitmap;
+
     }
 }
