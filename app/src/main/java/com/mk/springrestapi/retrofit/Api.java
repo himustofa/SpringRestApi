@@ -50,8 +50,12 @@ public interface Api {
     @DELETE("student/delete/{id}")
     Call<Boolean> deleteById(@Path("id") String id);
 
-    @Multipart
+    /*@Multipart
     @POST("/upload")
     //Call<ResponseBody> uploadImage(@Part MultipartBody.Part file);
-    Call<ResponseBody> uploadImage(@Part MultipartBody.Part file, @Part("name") RequestBody requestBody);
+    Call<ResponseBody> uploadImage(@Part MultipartBody.Part file, @Part("name") RequestBody requestBody);*/
+
+    @POST("updatePhoto")
+    @Multipart
+    Call<String> uploadImage(@Part MultipartBody.Part img);
 }

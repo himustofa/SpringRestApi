@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                 if (bitmap != null) {
                     String imagePath = Utility.saveToInternalStorage(MainActivity.this, bitmap, "sample");
+                    Log.d(TAG, imagePath);
                     imageView.setImageBitmap(Utility.loadImage(imagePath, "sample"));
                     uploadToServer(imagePath, "sample");
                 }
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadToServer(String filePath, String imageName) {
-        //Create a file object using file path
+        /*//Create a file object using file path
         //File file = new File(filePath);
         File file = new File(filePath, imageName);
         // Create a request body with file and image media type
@@ -216,6 +217,30 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                Log.e(TAG, "Retrofit " + t.getMessage());
+            }
+        });*/
+
+
+        Log.d(TAG, filePath+"  " + imageName);
+
+        File file = new File(filePath, imageName);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("img", file.getName(), requestBody);
+        Log.d(TAG, imageName+"  " + fileToUpload);
+        Call<String> res = RetrofitClient.getInstance().getApi().uploadImage(fileToUpload);
+        res.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        Log.d(TAG, "Retrofit " + new Gson().toJson(response.body()));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 Log.e(TAG, "Retrofit " + t.getMessage());
             }
         });
